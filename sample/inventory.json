@@ -1,0 +1,9 @@
+{
+  "wave_size": 2,
+  "workloads": [
+    {"id": "orders-db", "name": "Orders database", "type": "relational-database", "environment": "production", "data_classification": "confidential", "rto_hours": 4, "rpo_hours": 1, "depends_on": []},
+    {"id": "orders-api", "name": "Orders API", "type": "api", "environment": "production", "data_classification": "internal", "rto_hours": 2, "rpo_hours": 1, "depends_on": ["orders-db"]},
+    {"id": "customer-portal", "name": "Customer portal", "type": "web-frontend", "environment": "production", "data_classification": "public", "rto_hours": 8, "rpo_hours": 4, "depends_on": ["orders-api"]},
+    {"id": "nightly-loader", "name": "Nightly data loader", "type": "batch", "environment": "production", "data_classification": "internal", "rto_hours": 24, "rpo_hours": 24, "depends_on": ["orders-db"]}
+  ]
+}
